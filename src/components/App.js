@@ -1,7 +1,4 @@
 import '../index.css';
-import Header from './Header';
-import Main from './Main';
-import Footer from './Footer';
 import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import EditProfilePopup from './EditProfilePopup';
@@ -11,9 +8,12 @@ import React from 'react';
 import { Route, Switch} from 'react-router-dom';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
+import ProtectedRoute from './ProtectedRoute';
+import Main from './Main';
 
 function App() {
-  //Джеб-джеб, уход под левую, хук правой (в стойке левши, конечно)
+  //Временная заглушка
+  const loggedIn = true;
   //Создаём переменные состояния для попапов с помощью хуков
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -137,27 +137,33 @@ function App() {
   //Чтобы во всех них был доступен контекст
   return (
     <CurrentUserContext.Provider value={currentUser}>
-      <Switch>
-        <Route path="/sign-up">
-          <p>Здесь будет регистрация</p>
-        </Route>
-        <Route path="/sign-in">
-          <p>Здесь будет авторизация</p>
-        </Route>
-        <div className="App">
-          <div className="page">
-          <Header />
-          <Main onAddPlace={handleAddPlaceClick} onEditAvatar={handleEditAvatarClick} onEditProfile={handleEditProfileClick} cards={cards} onCardClick={handleCardClick} onCardLike={handleCardLike} onCardDelete={handleCardDelete} />
-          <Footer />
+      <div className="App">
+        <div className="page">
+          <Switch>
+            <Route path="/sign-up">
+              <p>Здесь будет регистрация</p>
+            </Route>
+            <Route path="/sign-in">
+              <p>Здесь будет авторизация</p>
+            </Route>
+            <ProtectedRoute exact path="/"
+              loggedIn={loggedIn}
+              component={Main}
+              onAddPlace={handleAddPlaceClick}
+              onEditAvatar={handleEditAvatarClick}
+              onEditProfile={handleEditProfileClick}
+              cards={cards} onCardClick={handleCardClick}
+              onCardLike={handleCardLike}
+              onCardDelete={handleCardDelete}
+            />
+          </Switch>
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
           <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
           <PopupWithForm name='delete' title='Вы уверены?' onClose={closeAllPopups} buttonText={'Да'} />
-
           <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
-          </div>
         </div>
-      </Switch>
+      </div>
     </CurrentUserContext.Provider>
   );
 }
