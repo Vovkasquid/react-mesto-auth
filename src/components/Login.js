@@ -1,20 +1,13 @@
 import React from 'react';
 import Header from './Header';
+import AuthComponent from './AuthComponent';
 
 //Компонент для логина пользователя
 function Login() {
+  //Ниже передадим компоненту не стейт, а просто переменную, чтобы он правильно отрендерил компонент
+  //Компонент будет не динамическим, а статистическим и включать по роуту. Его перерисовывать не надо
   return (
-    <>
-      <Header textButton={'Войти'}/>
-      <section className="auth page__auth">
-        <h1 className="auth__header">Регистрация</h1>
-        <form name='authorization' className="auth__form">
-          <input type="email" name="editLinkAvatar" id="email-input-login" className="auth__input" placeholder="Email" required/>
-          <input type="password" name="editLinkAvatar" id="password-input-login" className="auth__input" placeholder="Пароль" required/>
-          <button aria-label="Войти" type="submit" className={`auth__button`}>Вход</button>
-        </form>
-      </section>
-    </>
+    <AuthComponent isLogin={true}/>
   );
 }
 
