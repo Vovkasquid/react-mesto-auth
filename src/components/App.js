@@ -14,7 +14,6 @@ import Login from './Login';
 import Register from './Register';
 import InfoToolTip from './InfoTooltip';
 import * as auth from '../utils/auth';
-import {checkToken} from "../utils/auth";
 
 function App() {
   //константа для работы с useHistory
@@ -35,6 +34,7 @@ function App() {
   //При монтировании компонента вызовется этот хук
   //В нём произведём запрос на сервер, чтобы получить новые данные
   React.useEffect(() => {
+    //Производим запрос на сервер
     Promise.all([
       //Передаём Массив промисов, которые необходимо выполнить
       //Ответ будет в массиве данных, по порядку написания промисов
@@ -54,6 +54,11 @@ function App() {
       })
   }, []);
 
+  //Проверяем есть ли токен в хранилище (делаем 1 раз при монтировании)
+  React.useEffect(() => {
+    console.log('чекаем токен');
+    tokenCheck();
+  }, [])
 
   //Обработчик постановки и удаления лайков
   function handleCardLike(card) {
@@ -161,13 +166,17 @@ function App() {
   const tokenCheck = () => {
     //Получаем токен из локального хранилища
     const jwt = localStorage.getItem('jwt');
-
+    console.log(`jwt=${jwt}`)
     //Если токен есть, то надо залогиниться
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
-        if (res.email) {
+        console.log('ответ на токен чек =')
+        console.log(res.data.email);
+        console.log(res);
+        if (res.data.email) {
           setEmail(res.email);
           setLoggedIn(true);
+          console.log(`loggedin = ${loggedIn}`)
           history.push('/');
         }
       });
@@ -178,8 +187,10 @@ function App() {
   const handleLogin = (password, email) => {
     auth.authorize(password, email)
       .then(data => {
+        console.log(data.token)
         //Проверяем, что в ответе есть токен
         if (data.token) {
+          localStorage.setItem('jwt', data.token);
           setLoggedIn(true);
           history.push('/');
         }
@@ -187,10 +198,6 @@ function App() {
       .catch(err => console.log(err));
   }
 
-  //Обработчик для выхода из аккаунта
-  const onSignOut = () => {
-
-  }
 
   //Обработчик регистрации
   const handleRegister = (password, email) => {
