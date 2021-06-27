@@ -1,4 +1,4 @@
-export const BASE_URL = 'https://auth.nomoreparties.co/';
+export const BASE_URL = 'https://auth.nomoreparties.co';
 
 //Функция обработки ответа от сервера
 const handleResponse = response => response.ok ? response.json() : Promise.reject(`Ошибка ${response.status}`);
@@ -8,6 +8,7 @@ export const register = (password, email) => {
   return fetch(`${BASE_URL}/signup`, {
     method: 'POST',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({password, email})
@@ -21,6 +22,7 @@ export const authorize = (password, email) => {
     method: 'POST',
     headers: {
       'Accept': 'application/json',
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify({password, email})
   })
@@ -31,6 +33,7 @@ export const checkToken = (token) => {
   return fetch(`${BASE_URL}/users/me`, {
     method: 'GET',
     headers: {
+      'Accept': 'application/json',
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     }

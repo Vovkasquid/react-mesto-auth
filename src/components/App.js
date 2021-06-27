@@ -18,8 +18,6 @@ import * as auth from '../utils/auth';
 function App() {
   //константа для работы с useHistory
   const history = useHistory();
-  //Временная заглушка
-  const loggedIn = true;
   //Создаём переменные состояния для попапов с помощью хуков
   const [isEditProfilePopupOpen, setIsEditProfilePopupOpen] = React.useState(false);
   const [isAddPlacePopupOpen, setIsAddPlacePopupOpen] = React.useState(false);
@@ -28,6 +26,9 @@ function App() {
   const [currentUser, setCurrentUser] = React.useState({});
   //Инициализируем стейт с карточками
   const [cards, setCards] = React.useState([]);
+  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [email, setEmail] = React.useState('');
+  const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
 
   //При монтировании компонента вызовется этот хук
   //В нём произведём запрос на сервер, чтобы получить новые данные
@@ -150,6 +151,41 @@ function App() {
   const headerButtonHandlerMain = () => {
     console.log('Клик по выходу')
   }
+
+  //Функция проверки токена в локальном хранилище
+  const tokenCheck = () => {
+    //Получаем токен из локального хранилища
+    const jwt = localStorage.getItem('jwt');
+
+    //Если токен есть, то надо залогиниться
+    /*
+    if (jwt){
+      duckAuth.getContent(jwt).then((res) => {
+        if (res.email) {
+          setUserData({
+            username: res.username,
+            email: res.email
+          });
+          setLoggedIn(true);
+          history.push('/ducks');
+        }
+      });
+    } */
+  }
+
+  //Обработчик регистрации
+  const handleRegister = (password, email) => {
+    auth.register(password, email)
+      .then((data) => {
+          //Здесь должны показать попап
+          console.log('Успешная регистрация');
+          console.log(data);
+          //Отправляем на страницу входа
+          history.push('/sign-in')
+        })
+      .catch(err => console.log(err));
+  }
+
   //Возвращаем разметку всей страницы
   //Предварительно оборачваем все компоненты в провайдер контекста
   //Чтобы во всех них был доступен контекст
@@ -159,7 +195,10 @@ function App() {
         <div className="page">
           <Switch>
             <Route path="/sign-up">
-              <Register headerHandler={headerButtonHandlerSignUp} />
+              <Register
+                headerHandler={headerButtonHandlerSignUp}
+                handlerRegister={handleRegister}
+              />
             </Route>
             <Route path="/sign-in">
               <Login headerHandler={headerButtonHandlerSignIn}/>
