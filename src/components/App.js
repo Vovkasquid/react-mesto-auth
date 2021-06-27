@@ -10,6 +10,7 @@ import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
+import Login from './Login';
 
 function App() {
   //Временная заглушка
@@ -144,7 +145,7 @@ function App() {
               <p>Здесь будет регистрация</p>
             </Route>
             <Route path="/sign-in">
-              <p>Здесь будет авторизация</p>
+              <Login />
             </Route>
             <ProtectedRoute exact path="/"
               loggedIn={loggedIn}

@@ -1,11 +1,12 @@
 .header {
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   box-sizing: border-box;
   padding: 45px 0 41px 0;
   border-bottom: 1px solid rgba(84,84,84,0.7);
   min-width: 320px;
+  color: #FFFFFF;
 }
 
 @media screen and (max-width: 1135px) {
@@ -13,3 +14,42 @@
     padding: 28px 0 42px 0;
   }
 }
+
+.header__info-block {
+  display: flex;
+  justify-items: center;
+  justify-content: space-between;
+}
+
+.header__user-email {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+  text-align: right;
+  margin: 0 24px 0 0;
+}
+
+.header__universal-button {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 1.22;
+  text-align: right;
+  color: #FFFFFF;
+  background-color: #000000;
+  border: none;
+  padding: 0;
+  transition: opacity 0.3s linear;
+}
+
+.header__universal-button:focus {
+  border: 0;
+}
+
+.header__universal-button:hover {
+  opacity: .6;
+}
+
