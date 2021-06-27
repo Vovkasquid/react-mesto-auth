@@ -11,6 +11,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
 import Login from './Login';
+import PageNotFound from './PageNotFound';
 
 function App() {
   //Временная заглушка
@@ -157,6 +158,9 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
             />
+            <Route path="*">
+              <PageNotFound />
+            </Route>
           </Switch>
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
           <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
