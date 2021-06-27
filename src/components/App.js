@@ -5,13 +5,12 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import React from 'react';
-import { Route, Switch} from 'react-router-dom';
+import { Route, Switch, Redirect} from 'react-router-dom';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
 import Login from './Login';
-import PageNotFound from './PageNotFound';
 import Register from './Register';
 
 function App() {
@@ -160,7 +159,7 @@ function App() {
               onCardDelete={handleCardDelete}
             />
             <Route path="*">
-              <PageNotFound />
+              <Redirect to="/" />
             </Route>
           </Switch>
           <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
