@@ -54,6 +54,11 @@
 @import url(./blocks/auth/__button/auth__button.css);
 @import url(./blocks/auth/__answer-text/auth__answer-text.css);
 @import url(./blocks/auth/__link/auth__link.css);
+@import url(./blocks/info-tool-tip-popup/info-tool-tip-popup.css);
+@import url(./blocks/info-tool-tip-popup/__close-button/info-tool-tip-popup__close-button.css);
+@import url(./blocks/info-tool-tip-popup/__container/info-tool-tip-popup__container.css);
+@import url(./blocks/info-tool-tip-popup/__description/info-tool-tip-popup__description.css);
+@import url(./blocks/info-tool-tip-popup/__picture/info-tool-tip-popup__picture.css);
 @import url(./blocks/card/__like-button/_status/card__like-button_status_active.css);
 @import url(./blocks/card/__delete-button/_type/card__delete-button_type_invisible.css);
 @import url(./blocks/image-popup/_status/image-popup_status_active.css);
