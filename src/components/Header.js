@@ -6,7 +6,7 @@ function Header({loggedIn, textButton, userEmail}) {
       <img src={logo} alt="Логотип соцсети Место" className="logo"/>
       <div className="header__info-block">
         <p className="header__user-email">{userEmail || ''}</p>
-        <button className= {loggedIn ? "header__universal-button header__universal-button_color_grey" : "header__universal-button"}>{textButton}</button>
+        <button aria-label={textButton} className= {loggedIn ? "header__universal-button header__universal-button_color_grey" : "header__universal-button"}>{textButton}</button>
       </div>
     </header>
   );
