@@ -29,6 +29,7 @@ function App() {
   const [loggedIn, setLoggedIn] = React.useState(false);
   const [email, setEmail] = React.useState('');
   const [isRegisterPopupOpen, setIsRegisterPopupOpen] = React.useState(false);
+  const [isSuccessRegister, setIsSuccessRegister] = React.useState(false);
 
   //При монтировании компонента вызовется этот хук
   //В нём произведём запрос на сервер, чтобы получить новые данные
@@ -93,6 +94,7 @@ function App() {
     setIsEditAvatarPopupOpen(false);
     setIsEditProfilePopupOpen(false);
     setIsAddPlacePopupOpen(false);
+    setIsRegisterPopupOpen(false);
     setSelectedCard(null);
   }
 
@@ -178,12 +180,19 @@ function App() {
     auth.register(password, email)
       .then((data) => {
           //Здесь должны показать попап
-          console.log('Успешная регистрация');
-          console.log(data);
+          //Проверяем есть ли в ответе эмейл
+          if (data.data.email) {
+            //Выставляем стейты для попапа
+            setIsSuccessRegister(true);
+            setIsRegisterPopupOpen(true);
+          }
           //Отправляем на страницу входа
           history.push('/sign-in')
         })
-      .catch(err => console.log(err));
+      .catch(err => {
+        console.log(err)
+        setIsRegisterPopupOpen(true);
+      });
   }
 
   //Возвращаем разметку всей страницы
@@ -241,8 +250,13 @@ function App() {
           />
           <ImagePopup
             card={selectedCard}
-            onClose={closeAllPopups}/>
-          <InfoToolTip />
+            onClose={closeAllPopups}
+          />
+          <InfoToolTip
+            isOpen={isRegisterPopupOpen}
+            onClose={closeAllPopups}
+            isSucces={isSuccessRegister}
+          />
         </div>
       </div>
     </CurrentUserContext.Provider>
