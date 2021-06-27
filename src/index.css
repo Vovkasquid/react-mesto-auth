@@ -4,6 +4,9 @@
 @import url(./blocks/page/page.css);
 @import url(./blocks/page/__header/page__header.css);
 @import url(./blocks/header/header.css);
+@import url(./blocks/header/__info-block/header__info-block.css);
+@import url(./blocks/header/__universal-button/header__universal-button.css);
+@import url(./blocks/header/__user-email/header__user-email.css);
 @import url(./blocks/logo/logo.css);
 @import url(./blocks/content/content.css);
 @import url(./blocks/profile/profile.css);
@@ -51,3 +54,4 @@
 @import url(./blocks/edit-form/__submit-button/_disabled/edit-form__submit-button_disabled.css);
 @import url(./blocks/edit-form/__form-description/_type/edit-form__form-description_type_delete.css);
 @import url(./blocks/edit-form/__submit-button/_type/edit-form__submit-button_type_delete.css);
+@import url(./blocks/header/__universal-button/_color/header__universal-button_color_grey.css)

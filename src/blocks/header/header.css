@@ -15,47 +15,13 @@
   }
 }
 
-.header__info-block {
-  display: flex;
-  justify-items: center;
-  justify-content: space-between;
-}
 
-.header__user-email {
-  font-family: Inter;
-  font-style: normal;
-  font-weight: 500;
-  font-size: 18px;
-  line-height: 1.22;
-  text-align: right;
-  margin: 0 24px 0 0;
-}
 
-.header__universal-button {
-  font-family: Inter;
-  font-style: normal;
-  font-weight: normal;
-  font-size: 18px;
-  line-height: 1.22;
-  text-align: right;
-  color: #FFFFFF;
-  background-color: #000000;
-  border: none;
-  padding: 0;
-  transition: opacity 0.3s linear;
-}
 
-.header__universal-button:focus {
-  border: 0;
-}
 
-.header__universal-button:hover {
-  opacity: .6;
-}
 
-.header__universal-button_color_grey {
-  color: #A9A9A9;
-}
+
+
 
 .auth {
   display: flex;
