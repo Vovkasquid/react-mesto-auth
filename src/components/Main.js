@@ -10,7 +10,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCa
 
   return (
     <>
-      <Header />
+      <Header loggedIn={true} textButton={'Выйти'} userEmail={'domtruba@shatat.ru'} />
       <main className="content">
         <section className="profile">
           <div className="profile__person">

@@ -4,8 +4,7 @@ import Header from './Header';
 //Компонент для логина пользователя
 function Login() {
   return (
-    <Header />
-
+    <Header textButton={'Войти'}/>
   );
 }
 
