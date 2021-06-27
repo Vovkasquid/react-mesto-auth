@@ -12,6 +12,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
 import Login from './Login';
 import PageNotFound from './PageNotFound';
+import Register from './Register';
 
 function App() {
   //Временная заглушка
@@ -143,7 +144,7 @@ function App() {
         <div className="page">
           <Switch>
             <Route path="/sign-up">
-              <p>Здесь будет регистрация</p>
+              <Register />
             </Route>
             <Route path="/sign-in">
               <Login />

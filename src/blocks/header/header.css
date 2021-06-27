@@ -107,6 +107,10 @@
   margin: 0;
 }
 
+.auth__input:focus {
+  outline: none;
+}
+
 .auth__button {
   width: 358px;
   font-family: Inter;
@@ -128,5 +132,32 @@
 }
 
 .auth__button:hover {
+  opacity: .6;
+}
+
+.auth__answer-text {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  margin: 15px 0 0 0;
+}
+
+.auth__link {
+  font-family: Inter;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 14px;
+  line-height: 17px;
+  text-align: center;
+  color: #FFFFFF;
+  text-decoration: none;
+  transition: opacity .3s linear;
+}
+
+.auth__link:hover {
   opacity: .6;
 }
