@@ -4,10 +4,13 @@ import { Link } from 'react-router-dom';
 
 //Чтобы не дублировать практически одинакоый код в Login и Register
 //Делаем этот компонент
-function AuthComponent({isLogin}) {
+function AuthComponent({isLogin, headerHandler}) {
   return (
     <>
-      <Header textButton={isLogin ? 'Регистрация' : 'Войти' }/>
+      <Header
+        textButton={isLogin ? 'Регистрация' : 'Войти' }
+        headerHandler={headerHandler}
+      />
       <section className="auth page__auth">
         <h1 className="auth__header">{isLogin ? 'Вход' : 'Регистрация'}</h1>
         <form name='authorization' className="auth__form">

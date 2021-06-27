@@ -5,7 +5,7 @@ import EditProfilePopup from './EditProfilePopup';
 import EditAvatarPopup from './EditAvatarPopup';
 import AddPlacePopup from './AddPlacePopup';
 import React from 'react';
-import { Route, Switch, Redirect} from 'react-router-dom';
+import { Route, Switch, Redirect, useHistory} from 'react-router-dom';
 import api from '../utils/api';
 import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import ProtectedRoute from './ProtectedRoute';
@@ -16,6 +16,8 @@ import InfoToolTip from './InfoTooltip';
 import * as auth from '../utils/auth';
 
 function App() {
+  //константа для работы с useHistory
+  const history = useHistory();
   //Временная заглушка
   const loggedIn = true;
   //Создаём переменные состояния для попапов с помощью хуков
@@ -136,6 +138,18 @@ function App() {
       });
   }
 
+  //Обработчики функциональных кнопок в header
+  const headerButtonHandlerSignIn = () => {
+    history.push('/sign-up')
+  }
+
+  const headerButtonHandlerSignUp = () => {
+    history.push('/sign-in')
+  }
+
+  const headerButtonHandlerMain = () => {
+    console.log('Клик по выходу')
+  }
   //Возвращаем разметку всей страницы
   //Предварительно оборачваем все компоненты в провайдер контекста
   //Чтобы во всех них был доступен контекст
@@ -145,10 +159,10 @@ function App() {
         <div className="page">
           <Switch>
             <Route path="/sign-up">
-              <Register />
+              <Register headerHandler={headerButtonHandlerSignUp} />
             </Route>
             <Route path="/sign-in">
-              <Login />
+              <Login headerHandler={headerButtonHandlerSignIn}/>
             </Route>
             <ProtectedRoute exact path="/"
               loggedIn={loggedIn}
@@ -159,6 +173,7 @@ function App() {
               cards={cards} onCardClick={handleCardClick}
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
+              headerHandler={headerButtonHandlerMain}
             />
             <Route path="*">
               <Redirect to="/" />
