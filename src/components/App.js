@@ -12,6 +12,7 @@ import ProtectedRoute from './ProtectedRoute';
 import Main from './Main';
 import Login from './Login';
 import Register from './Register';
+import InfoToolTip from './InfoTooltip';
 
 function App() {
   //Временная заглушка
@@ -167,6 +168,7 @@ function App() {
           <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
           <PopupWithForm name='delete' title='Вы уверены?' onClose={closeAllPopups} buttonText={'Да'} />
           <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+          <InfoToolTip />
         </div>
       </div>
     </CurrentUserContext.Provider>
