@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 //Чтобы не дублировать практически одинакоый код в Login и Register
 //Делаем этот компонент
-function AuthComponent({isLogin, headerHandler, handlerRegister}) {
+function AuthComponent({isLogin, headerHandler, handlerSubmit}) {
   //Стейт для сбора данных с формы
   const [data, setData] = useState({
     email: '',
@@ -25,8 +25,7 @@ function AuthComponent({isLogin, headerHandler, handlerRegister}) {
   //Обработчик сабмита формы
   const formSubmitHandler = (event) => {
     event.preventDefault();
-    console.log(data);
-    handlerRegister(data.password, data.email);
+    handlerSubmit(data.password, data.email);
   }
   return (
     <>

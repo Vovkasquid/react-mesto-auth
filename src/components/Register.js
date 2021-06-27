@@ -9,7 +9,7 @@ function Register({headerHandler, handlerRegister}) {
     <AuthComponent
       isLogin={false}
       headerHandler={headerHandler}
-      handlerRegister={handlerRegister}
+      handlerSubmit={handlerRegister}
     />
   );
 }

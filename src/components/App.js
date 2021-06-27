@@ -14,6 +14,7 @@ import Login from './Login';
 import Register from './Register';
 import InfoToolTip from './InfoTooltip';
 import * as auth from '../utils/auth';
+import {checkToken} from "../utils/auth";
 
 function App() {
   //константа для работы с useHistory
@@ -151,7 +152,9 @@ function App() {
   }
 
   const headerButtonHandlerMain = () => {
-    console.log('Клик по выходу')
+    localStorage.removeItem('jwt');
+    setLoggedIn(false);
+    history.push('/sign-in');
   }
 
   //Функция проверки токена в локальном хранилище
@@ -160,19 +163,33 @@ function App() {
     const jwt = localStorage.getItem('jwt');
 
     //Если токен есть, то надо залогиниться
-    /*
-    if (jwt){
-      duckAuth.getContent(jwt).then((res) => {
+    if (jwt) {
+      auth.checkToken(jwt).then((res) => {
         if (res.email) {
-          setUserData({
-            username: res.username,
-            email: res.email
-          });
+          setEmail(res.email);
           setLoggedIn(true);
-          history.push('/ducks');
+          history.push('/');
         }
       });
-    } */
+    }
+  }
+
+  //Обработчик для залогинивания
+  const handleLogin = (password, email) => {
+    auth.authorize(password, email)
+      .then(data => {
+        //Проверяем, что в ответе есть токен
+        if (data.token) {
+          setLoggedIn(true);
+          history.push('/');
+        }
+      })
+      .catch(err => console.log(err));
+  }
+
+  //Обработчик для выхода из аккаунта
+  const onSignOut = () => {
+
   }
 
   //Обработчик регистрации
@@ -210,7 +227,10 @@ function App() {
               />
             </Route>
             <Route path="/sign-in">
-              <Login headerHandler={headerButtonHandlerSignIn}/>
+              <Login
+                headerHandler={headerButtonHandlerSignIn}
+                handlerLogin={handleLogin}
+              />
             </Route>
             <ProtectedRoute exact path="/"
               loggedIn={loggedIn}
@@ -222,6 +242,7 @@ function App() {
               onCardLike={handleCardLike}
               onCardDelete={handleCardDelete}
               headerHandler={headerButtonHandlerMain}
+              email={email}
             />
             <Route path="*">
               <Redirect to="/" />
