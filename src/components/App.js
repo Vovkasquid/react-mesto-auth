@@ -13,6 +13,7 @@ import Main from './Main';
 import Login from './Login';
 import Register from './Register';
 import InfoToolTip from './InfoTooltip';
+import * as auth from '../utils/auth';
 
 function App() {
   //Временная заглушка
@@ -163,11 +164,30 @@ function App() {
               <Redirect to="/" />
             </Route>
           </Switch>
-          <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-          <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar}/>
-          <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlace} />
-          <PopupWithForm name='delete' title='Вы уверены?' onClose={closeAllPopups} buttonText={'Да'} />
-          <ImagePopup card={selectedCard} onClose={closeAllPopups}/>
+          <EditProfilePopup
+            isOpen={isEditProfilePopupOpen}
+            onClose={closeAllPopups}
+            onUpdateUser={handleUpdateUser}
+          />
+          <EditAvatarPopup
+            isOpen={isEditAvatarPopupOpen}
+            onClose={closeAllPopups}
+            onUpdateAvatar={handleUpdateAvatar}
+          />
+          <AddPlacePopup
+            isOpen={isAddPlacePopupOpen}
+            onClose={closeAllPopups}
+            onAddPlace={handleAddPlace}
+          />
+          <PopupWithForm
+            name='delete'
+            title='Вы уверены?'
+            onClose={closeAllPopups}
+            buttonText={'Да'}
+          />
+          <ImagePopup
+            card={selectedCard}
+            onClose={closeAllPopups}/>
           <InfoToolTip />
         </div>
       </div>
