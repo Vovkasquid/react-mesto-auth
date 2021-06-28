@@ -174,6 +174,9 @@ function App() {
           setLoggedIn(true);
           history.push('/');
         }
+      })
+        .catch((err)=>{
+        console.log(err);
       });
     }
   }
