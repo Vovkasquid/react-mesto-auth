@@ -1,5 +1,6 @@
 import React from 'react';
 import AuthComponent from './AuthComponent';
+import {Link} from 'react-router-dom';
 
 //Компонент для логина пользователя
 function Register({headerHandler, handlerRegister}) {
@@ -12,7 +13,9 @@ function Register({headerHandler, handlerRegister}) {
       handlerSubmit={handlerRegister}
       title={'Регистрация'}
       buttonTitle={'Зарегестрироваться'}
-    />
+    >
+      {<p className='auth__answer-text'>Уже зарегистрированы? <Link to='/sign-in' className='auth__link'>Войти</Link></p>}
+    </AuthComponent>
   );
 }
 

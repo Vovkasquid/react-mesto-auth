@@ -1,10 +1,9 @@
 import {useState} from 'react';
 import Header from "./Header";
-import { Link } from 'react-router-dom';
 
 //Чтобы не дублировать практически одинакоый код в Login и Register
 //Делаем этот компонент
-function AuthComponent({isLogin, headerHandler, handlerSubmit, title, buttonTitle}) {
+function AuthComponent({isLogin, headerHandler, handlerSubmit, title, buttonTitle, children}) {
   //Стейт для сбора данных с формы
   const [data, setData] = useState({
     email: '',
@@ -39,7 +38,7 @@ function AuthComponent({isLogin, headerHandler, handlerSubmit, title, buttonTitl
           <input type="email" name="email" id="email-input-login" className="auth__input" placeholder="Email" value={data.email} onChange={handleChange} required/>
           <input type="password" name="password" id="password-input-login" className="auth__input" placeholder="Пароль" value={data.password} onChange={handleChange} required/>
           <button aria-label={buttonTitle} type="submit" className={`auth__button`}>{buttonTitle}</button>
-          {!isLogin && (<p className='auth__answer-text'>Уже зарегистрированы? {!isLogin && (<Link to='/sign-in' className='auth__link'>Войти</Link>)} </p>)}
+          {children}
         </form>
       </section>
     </>

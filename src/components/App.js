@@ -213,6 +213,9 @@ function App() {
         })
       .catch(err => {
         console.log(err)
+        //Если делать несколько регистраций подряд, то может быть неверное состояние стейта
+        //Поэтому принудительно выставляем его в false
+        setIsSuccessRegister(false);
         setIsRegisterPopupOpen(true);
       });
   }
