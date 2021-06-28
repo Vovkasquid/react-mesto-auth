@@ -10,6 +10,8 @@ function Login({headerHandler, handlerLogin}) {
       isLogin={true}
       headerHandler={headerHandler}
       handlerSubmit={handlerLogin}
+      title={'Вход'}
+      buttonTitle={'Войти'}
     />
   );
 }

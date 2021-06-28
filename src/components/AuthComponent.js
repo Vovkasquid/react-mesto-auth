@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 
 //Чтобы не дублировать практически одинакоый код в Login и Register
 //Делаем этот компонент
-function AuthComponent({isLogin, headerHandler, handlerSubmit}) {
+function AuthComponent({isLogin, headerHandler, handlerSubmit, title, buttonTitle}) {
   //Стейт для сбора данных с формы
   const [data, setData] = useState({
     email: '',
@@ -34,11 +34,11 @@ function AuthComponent({isLogin, headerHandler, handlerSubmit}) {
         headerHandler={headerHandler}
       />
       <section className="auth page__auth">
-        <h1 className="auth__header">{isLogin ? 'Вход' : 'Регистрация'}</h1>
+        <h1 className="auth__header">{title}</h1>
         <form onSubmit={formSubmitHandler} name='authorization' className="auth__form">
           <input type="email" name="email" id="email-input-login" className="auth__input" placeholder="Email" value={data.email} onChange={handleChange} required/>
           <input type="password" name="password" id="password-input-login" className="auth__input" placeholder="Пароль" value={data.password} onChange={handleChange} required/>
-          <button aria-label={isLogin ? 'Войти' : 'Зарегестрироваться'} type="submit" className={`auth__button`}>{isLogin ? 'Войти' : 'Зарегестрироваться'}</button>
+          <button aria-label={buttonTitle} type="submit" className={`auth__button`}>{buttonTitle}</button>
           {!isLogin && (<p className='auth__answer-text'>Уже зарегистрированы? {!isLogin && (<Link to='/sign-in' className='auth__link'>Войти</Link>)} </p>)}
         </form>
       </section>

@@ -10,6 +10,8 @@ function Register({headerHandler, handlerRegister}) {
       isLogin={false}
       headerHandler={headerHandler}
       handlerSubmit={handlerRegister}
+      title={'Регистрация'}
+      buttonTitle={'Зарегестрироваться'}
     />
   );
 }
