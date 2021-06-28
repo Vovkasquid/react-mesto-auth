@@ -56,9 +56,8 @@ function App() {
 
   //Проверяем есть ли токен в хранилище (делаем 1 раз при монтировании)
   React.useEffect(() => {
-    console.log('чекаем токен');
     tokenCheck();
-  }, [])
+  }, []);
 
   //Обработчик постановки и удаления лайков
   function handleCardLike(card) {
@@ -159,6 +158,7 @@ function App() {
   const headerButtonHandlerMain = () => {
     localStorage.removeItem('jwt');
     setLoggedIn(false);
+    //Зануляем email при выходе
     history.push('/sign-in');
   }
 
@@ -166,17 +166,12 @@ function App() {
   const tokenCheck = () => {
     //Получаем токен из локального хранилища
     const jwt = localStorage.getItem('jwt');
-    console.log(`jwt=${jwt}`)
     //Если токен есть, то надо залогиниться
     if (jwt) {
       auth.checkToken(jwt).then((res) => {
-        console.log('ответ на токен чек =')
-        console.log(res.data.email);
-        console.log(res);
         if (res.data.email) {
-          setEmail(res.email);
+          setEmail(res.data.email);
           setLoggedIn(true);
-          console.log(`loggedin = ${loggedIn}`)
           history.push('/');
         }
       });
@@ -187,11 +182,11 @@ function App() {
   const handleLogin = (password, email) => {
     auth.authorize(password, email)
       .then(data => {
-        console.log(data.token)
         //Проверяем, что в ответе есть токен
         if (data.token) {
           localStorage.setItem('jwt', data.token);
           setLoggedIn(true);
+          setEmail(email);
           history.push('/');
         }
       })

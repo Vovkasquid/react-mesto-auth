@@ -4,7 +4,7 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext';
 import Header from './Header';
 import Footer from './Footer';
 
-function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete, headerHandler}) {
+function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCardLike, onCardDelete, headerHandler, email}) {
   //Подписываемся на контекст
   const currentUser = React.useContext(CurrentUserContext);
 
@@ -13,7 +13,7 @@ function Main({onEditProfile, onAddPlace, onEditAvatar, onCardClick, cards, onCa
       <Header
         loggedIn={true}
         textButton={'Выйти'}
-        userEmail={'domtruba@shatat.ru'}
+        userEmail={email}
         headerHandler={headerHandler}
       />
       <main className="content">
